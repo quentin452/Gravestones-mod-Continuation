@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static gravestone.config.GraveStoneConfig.logsEnabled;
+
 /**
  * GraveStone mod
  *
@@ -13,30 +15,38 @@ import org.apache.logging.log4j.Logger;
  */
 public class GSLogger {
 
-    private static Logger logger = LogManager.getLogger(ModInfo.ID);
-    private static Logger graveLogger = new GravesLogger();
+    private static final Logger logger = LogManager.getLogger(ModInfo.ID);
+    private static final Logger graveLogger = new GravesLogger();
 
     public static void log(Level logLevel, String message) {
-        logger.log(logLevel, message);
+        if (logsEnabled) {
+            logger.log(logLevel, message);
+        }
     }
 
     public static void logInfo(String message) {
-        logger.log(Level.INFO, message);
-    }
+        if (logsEnabled) {
+        log(Level.INFO, message);
+    } }
 
     public static void logError(String message) {
-        logger.log(Level.ERROR, message);
-    }
+        if (logsEnabled) {
+        log(Level.ERROR, message);
+    }}
 
     public static void logGrave(Level logLevel, String message) {
-        graveLogger.log(logLevel, message);
+        if (logsEnabled) {
+            graveLogger.log(logLevel, message);
+        }
     }
 
     public static void logInfoGrave(String message) {
-        graveLogger.log(Level.INFO, message);
-    }
+        if (logsEnabled) {
+        logGrave(Level.INFO, message);
+    }}
 
     public static void logErrorGrave(String message) {
-        graveLogger.log(Level.ERROR, message);
-    }
+        if (logsEnabled) {
+        logGrave(Level.ERROR, message);
+    }}
 }

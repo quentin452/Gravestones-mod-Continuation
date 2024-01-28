@@ -136,6 +136,8 @@ public class GraveStoneConfig {
     public static boolean enableTwilightForestKeeping;
     public static boolean enableAntiqueAtlasDeathMarkers;
 
+    public static boolean logsEnabled;
+
 
 
     public static List<GraveStoneHelper.RestrictedArea> restrictGraveGenerationInArea;
@@ -204,7 +206,7 @@ public class GraveStoneConfig {
         generateSwordGraves = config.get(Configuration.CATEGORY_GENERAL, "GenerateSwordGraves", true).getBoolean(true);
         renderGravesFlowers = config.get(Configuration.CATEGORY_GENERAL, "RenderGravesFlowers", true).getBoolean(true);
         vanillaRendererForSwordsGraves = config.get(Configuration.CATEGORY_GENERAL, "VanillaRendererForSwordsGraves", true).getBoolean(true);
-        
+
         // store items
         Property graveItemsCountProperty = config.get(Configuration.CATEGORY_GENERAL, "SavedItemsCount", 40);
         graveItemsCountProperty.comment = "This value must be between 0 an 40(in this case all items will be stored)!";
@@ -227,7 +229,7 @@ public class GraveStoneConfig {
         spawnChance = config.get(Configuration.CATEGORY_GENERAL, "SpawnChance", 80).getInt();
 
         isFogEnabled = config.get(Configuration.CATEGORY_GENERAL, "IsFogEnabled", true).getBoolean(true);
-        
+
         enableNightStone   = config.get(Configuration.CATEGORY_GENERAL, "EnableNightStone", true).getBoolean(true);
         enableThunderStone = config.get(Configuration.CATEGORY_GENERAL, "EnableThunderStone", true).getBoolean(true);
         showNightStoneMessage = config.get(Configuration.CATEGORY_GENERAL, "ShowNightStoneMessage", true).getBoolean(true);
@@ -263,6 +265,7 @@ public class GraveStoneConfig {
         craftableNightStone = config.get(CATEGORY_RECIPES, "CraftableNightStone", true).getBoolean(true);
         craftableThunderStone = config.get(CATEGORY_RECIPES, "CraftableThunderStone", true).getBoolean(true);
         hardAltarRecipe = config.get(CATEGORY_RECIPES, "HardAltarRecipe", false).getBoolean(false);
+        logsEnabled = config.get(CATEGORY_RECIPES, "EnableLogsforthemod?", false).getBoolean(false);
     }
 
     private static void entityConfig() {
@@ -310,7 +313,6 @@ public class GraveStoneConfig {
      * Read text from file if it exist or get default text
      */
     private static ArrayList<String> readStringsFromFile(String fileName, String[] defaultValues) {
-        ArrayList<String> list = new ArrayList();
         /*boolean exception = false;
          File file = new File(fileName);
 
@@ -356,8 +358,7 @@ public class GraveStoneConfig {
          }
          }
          */
-        list.addAll(Arrays.asList(defaultValues));
 
-        return list;
+        return (ArrayList<String>) new ArrayList(Arrays.asList(defaultValues));
     }
 }
